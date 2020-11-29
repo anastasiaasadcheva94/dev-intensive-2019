@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bender</string>
+    <string name="hint_text">Введите текст</string>
 </resources>
