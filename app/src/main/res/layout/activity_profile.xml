@@ -88,7 +88,7 @@
         android:paddingBottom="@dimen/spacing_normal_16">
 
         <TextView
-            style="@style/Profile.Metrica.Value"
+            style="@style/Profile.Metrics.Value"
             android:id="@+id/tv_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             android:drawableLeft = "@drawable/ic_sp_24" />
 
         <TextView
-            style="@style/Profile.Metrica.Label"
+            style="@style/Profile.Metrics.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_label_rating"/>
@@ -121,7 +121,7 @@
         android:paddingBottom="@dimen/spacing_normal_16">
 
         <TextView
-            style="@style/Profile.Metrica.Value"
+            style="@style/Profile.Metrics.Value"
             android:id="@+id/tv_respect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
             android:drawableLeft="@drawable/ic_respect_24" />
 
         <TextView
-            style="@style/Profile.Metrica.Label"
+            style="@style/Profile.Metrics.Label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_label_respect"/>

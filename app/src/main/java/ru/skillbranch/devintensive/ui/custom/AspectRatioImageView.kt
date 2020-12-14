@@ -9,7 +9,7 @@ import ru.skillbranch.devintensive.R
 @SuppressLint("AppCompatCustomView")
 class AspectRatioImageView @JvmOverloads constructor(
     context: Context,
-    attrs:AttributeSet? = null,
+    attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ImageView(context, attrs, defStyleAttr) {
     companion object{
@@ -18,11 +18,11 @@ class AspectRatioImageView @JvmOverloads constructor(
     private var aspectRatio = DEFAULT_ASPECT_RATIO
 
     init {
-    if (attrs!=null){
-    val a = context.obtainStyledAttributes(attrs, R.styleable.AspectRatioImageView)
-        aspectRatio = a.getFloat(R.styleable.AspectRatioImageView_aspectRatio, DEFAULT_ASPECT_RATIO)
-        a.recycle()
-    }
+        if (attrs!=null){
+            val a = context.obtainStyledAttributes(attrs, R.styleable.AspectRatioImageView)
+            aspectRatio = a.getFloat(R.styleable.AspectRatioImageView_aspectRatio, DEFAULT_ASPECT_RATIO)
+            a.recycle()
+        }
     }
 
 
@@ -31,5 +31,4 @@ class AspectRatioImageView @JvmOverloads constructor(
         val newHeight = (measuredWidth/aspectRatio).toInt()
         setMeasuredDimension(measuredWidth, newHeight)
     }
-
 }
