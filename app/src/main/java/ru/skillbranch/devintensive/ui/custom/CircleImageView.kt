@@ -117,7 +117,7 @@ class CircleImageView @JvmOverloads constructor(
 
         if (isSetupPending) {
             setup()
-            isSetupPending = false;
+            isSetupPending = false
         }
     }
 
@@ -342,7 +342,7 @@ class InitialsDrawable(
     }
 
     override fun draw(canvas: Canvas) {
-        paint.color = context.resources.getColor(R.color.color_accent_secondary, context.theme)
+        paint.color = context.resources.getColor(R.color.color_accent, context.theme)//color_accent
         canvas.drawRect(0f, 0f, bounds.width().toFloat(), bounds.height().toFloat(), paint)
 
         paint.color = Color.WHITE
