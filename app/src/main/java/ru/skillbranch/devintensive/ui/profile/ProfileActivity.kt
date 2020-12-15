@@ -6,6 +6,8 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.models.initials
 import ru.skillbranch.devintensive.models.toMap
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
@@ -42,42 +45,21 @@ class ProfileActivity : AppCompatActivity() {
         outState?.putBoolean(IS_EDIT_MODE, isEditMode)
     }
 
-    private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        viewModel.getProfileData().observe(this, Observer { updateUI(it) })
-        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
-    }
-
-    private fun updateTheme(mode: Int) {
-        Log.d("M_ProfileActivity","update theme")
-        delegate.localNightMode = mode
-    }
-
-    private fun updateUI(profile: Profile?) {
-        if (profile != null) {
-            profile.toMap().also {
-                for ((k,v) in viewFields) {
-                    v.text = it[k].toString()
-                }
-            }
-        }
-    }
-
-    private fun initViews(savedInstanceState: Bundle?) {
-        viewFields = mapOf(
-            "nickName" to tv_nick_name,
-            "rank" to tv_rank,
+    private fun initViews(state: Bundle?) {
+        infoFields = mapOf(
             "firstName" to et_first_name,
             "lastName" to et_last_name,
             "about" to et_about,
-            "repository" to et_repository,
+            "repository" to et_repository
+        )
+        viewFields = infoFields + mapOf(
+            "nickName" to tv_nick_name,
+            "rank" to tv_rank,
             "rating" to tv_rating,
             "respect" to tv_respect
         )
 
-
-
-        isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
+        isEditMode = state?.getBoolean(IS_EDIT_MODE, false) ?: false
         showCurrentMode(isEditMode)
 
         btn_edit.setOnClickListener {
@@ -89,6 +71,44 @@ class ProfileActivity : AppCompatActivity() {
         btn_switch_theme.setOnClickListener {
             viewModel.switchTheme()
         }
+
+        et_repository.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.onRepositoryChanged(s.toString())
+            }
+        })
+
+        iv_avatar.initials = null
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        viewModel.getProfileData().observe(this, Observer { updateUI(it) })
+        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+        viewModel.getRepositoryError().observe(this, Observer { updateRepoError(it) })
+    }
+
+    private fun updateTheme(mode: Int) {
+        Log.d("M_ProfileActivity","update theme")
+        delegate.setLocalNightMode(mode)
+    }
+
+    private fun updateUI(profile: Profile?) {
+        if (profile != null) {
+            profile.toMap().also {
+                for ((k,v) in viewFields) {
+                    v.text = it[k].toString()
+                }
+            }
+        }
+        iv_avatar.initials = profile?.initials
+    }
+
+    private fun updateRepoError(isError: Boolean) {
+        wr_repository.error = if (isError) "Невалидный адрес репозитория" else null
+        wr_repository.isErrorEnabled = isError
     }
 
 
