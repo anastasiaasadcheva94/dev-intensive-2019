@@ -15,9 +15,6 @@ class ProfileViewModel : ViewModel() {
     private val appTheme = MutableLiveData<Int>()
     private val repositoryError = MutableLiveData<Boolean>()
 
-
-
-
     init {
         Log.d("M_ProfileViewModel","init view model")
         profileData.value = repository.getProfile()
