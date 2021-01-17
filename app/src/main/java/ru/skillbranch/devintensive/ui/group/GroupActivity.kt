@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_group.*
 import kotlinx.android.synthetic.main.activity_group.toolbar
-import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.UserAdapter
@@ -80,7 +79,7 @@ class GroupActivity : AppCompatActivity() {
             addItemDecoration(divider)
         }
 
-        fab_group.setOnClickListener {
+        fab.setOnClickListener {
             viewModel.handleCreateGroup()
             finish()
             overridePendingTransition(R.anim.idel, R.anim.button_down)
@@ -97,8 +96,8 @@ class GroupActivity : AppCompatActivity() {
     }
 
     private fun toggleFab(isShow: Boolean) {
-        if (isShow) fab_group.show()
-        else fab_group.hide()
+        if (isShow) fab.show()
+        else fab.hide()
     }
 
     private fun addChipToGroup(user:UserItem){

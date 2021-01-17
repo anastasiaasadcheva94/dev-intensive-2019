@@ -15,11 +15,9 @@ data class Chat(
     var messages: MutableList<BaseMessage> = mutableListOf(),
     var isArchived: Boolean = false
 ) {
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    //fun unreadableMessageCount() = messages.count { !it.isReaded }
-    fun unreadableMessageCount(): Int {
-        return 1
-    }
+    fun unreadableMessageCount(): Int = messages.count { !it.isReaded }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageDate() = messages.lastOrNull()?.date

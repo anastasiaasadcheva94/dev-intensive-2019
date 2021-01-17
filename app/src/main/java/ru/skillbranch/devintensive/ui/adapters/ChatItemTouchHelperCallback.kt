@@ -14,6 +14,7 @@ class ChatItemTouchHelperCallback(
     private val adapter: ChatAdapter,
     private val swipeListener: (ChatItem) -> Unit
 ) : ItemTouchHelper.Callback() {
+
     private val bgRect = RectF()
     private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val iconBounds = Rect()
@@ -73,7 +74,10 @@ class ChatItemTouchHelperCallback(
     }
 
     private fun drawIcon(canvas: Canvas, itemView: View, dX: Float) {
-        val icon = itemView.resources.getDrawable(R.drawable.ic_baseline_archive_24, itemView.context.theme)
+        val icon = itemView.resources.getDrawable(
+            R.drawable.ic_baseline_archive_24,
+            itemView.context.theme
+        )
         val iconSize = itemView.resources.getDimensionPixelSize(R.dimen.icon_size)
         val space = itemView.resources.getDimensionPixelSize(R.dimen.spacing_normal_16)
 
