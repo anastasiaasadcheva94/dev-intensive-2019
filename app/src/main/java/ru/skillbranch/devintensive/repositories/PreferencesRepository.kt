@@ -4,7 +4,8 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
 import ru.skillbranch.devintensive.App
-import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.extensions.Profile
+
 
 object PreferencesRepository {
     private const val FIRST_NAME = "FIRST_NAME"
